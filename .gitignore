@@ -4,3 +4,6 @@ out/**/*
 Gemfile.lock
 .DS_Store
 .idea
+.gradle/
+gradle/
+build/

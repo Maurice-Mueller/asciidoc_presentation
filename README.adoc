@@ -48,3 +48,12 @@ out/
   -- revealjs/
   -- slides-pdf/
 ----
+
+== Gradle / Java
+
+On branch `gradle-java` you will find a quick start project for using the
+presentation project with java source code.
+
+=== Compile Java
+
+`./gradlew build`

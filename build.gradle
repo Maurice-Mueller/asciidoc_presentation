@@ -1,0 +1,35 @@
+/**
+ WARNING: Obviously, the directory layout for the source code should be the same as in config.rb!
+ */
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'src/java/src'
+        }
+        resources {
+            srcDirs 'src/java/resources'
+        }
+    }
+    test {
+        java {
+            srcDirs 'src/java/test'
+        }
+        resources {
+            srcDirs 'src/java/resources'
+        }
+    }
+}
+
+task wrapper(type: Wrapper) {
+    version '4.0'
+}
