@@ -11,9 +11,11 @@ task :'build-all' do
   buildAsciidocPdf
 end
 
-task :build do
+task :'build-revealjs' do
   buildRevealJS
 end
+
+task :build => :'build-revealjs'
 
 task :'init-all' do
   downloadRevealJS

@@ -33,12 +33,12 @@ class Test {
 
 [source,java,indent=0]
 ----
-include::{java}/test.java[]
+include::{java-src}/Hello.java[]
 ----
 
 === Code (from file with tags)
 
 [source,java,indent=0]
 ----
-include::{java}/test_tags.java[tag=print]
+include::{java-src}/Tags.java[tag=print]
 ----

@@ -1,4 +1,4 @@
-class Hello {
+class Tags {
 // tag::class_body[]
     private String myString = "Hello World!";
 
