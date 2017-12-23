@@ -29,7 +29,7 @@ $custom_attributes = ''
 # $custom_attributes += " java=#{Dir.pwd}/src/java"
 # and access it like {java} in your .adoc files.
 
-$custom_attributes += " java=#{Dir.pwd}/src/java"
+$custom_attributes += " java-src=#{Dir.pwd}/src/java/src"
 
 # you can use highlight.js, coderay or pygments
 $custom_attributes += ' source-highlighter=coderay'

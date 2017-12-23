@@ -30,6 +30,16 @@ sourceSets {
     }
 }
 
+task buildAll(type: Exec) {
+    commandLine 'bundle', 'exec', 'rake', 'build-all'
+}
+
+task buildRevealJS(type: Exec) {
+    commandLine 'bundle', 'exec', 'rake', 'build-revealjs'
+}
+
+build.finalizedBy(buildRevealJS)
+
 task wrapper(type: Wrapper) {
     version '4.0'
 }

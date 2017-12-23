@@ -54,6 +54,12 @@ out/
 On branch `gradle-java` you will find a quick start project for using the
 presentation project with java source code.
 
-=== Compile Java
+=== Compile Java and Reveal.js
 
 `./gradlew build`
+
+* the Reveal.js task will run after the build task
+
+=== Build all output formats
+
+`./gradlew buildAll`
