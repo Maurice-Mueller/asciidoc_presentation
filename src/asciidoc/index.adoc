@@ -1,0 +1,44 @@
+= Test
+Hello World!
+
+== Test First
+
+First
+
+=== Going Down
+
+Hello
+
+== Image
+
+image::test.jpg[]
+
+== Video
+
+ifndef::backend-pdf[]
+video::test.mp4[]
+endif::[]
+
+== Code (inline)
+
+[source,java]
+----
+class Test {
+  public String test = "hello";
+}
+----
+
+
+=== Code (from file)
+
+[source,java,indent=0]
+----
+include::{java}/test.java[]
+----
+
+=== Code (from file with tags)
+
+[source,java,indent=0]
+----
+include::{java}/test_tags.java[tag=print]
+----

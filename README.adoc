@@ -1,0 +1,50 @@
+= Asciidoc Presentation
+
+This project is a quick start project for using Asciidoctor with
+the Reveal.js plugin. It also utilizes Decktape.js to render the
+slides to a pdf.
+
+== Using
+
+This project relies on bundler (the standard dependency manager in ruby).
+
+`gem install bundler`
+
+=== Setup
+* `bundle install`
+* without Decktape.js: `bundle exec rake init`
+* with Decktape.js: `bundle exec rake init-all`
+
+If you want to use Decktape.js you need npm to be installed and accessible from
+your terminal.
+
+=== Build
+
+* `bundle exec rake build`
+** this will build only the Reveal.js version
+* `bundle exec rake build-all`
+** this will build pdf, html, slides-pdf, reveal.js
+
+=== Run
+
+* to start the presentation simply open the file `out/revealjs/project_name.html`
+
+== Settings
+
+All relevant settings are found in `config.rb`.
+
+== Standard directory layout
+
+[source]
+----
+src/
+  -- asciidoc/
+  -- resources/
+     -- images/
+     -- videos/
+out/
+  -- html/
+  -- pdf/
+  -- revealjs/
+  -- slides-pdf/
+----
