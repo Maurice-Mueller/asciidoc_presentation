@@ -5,9 +5,27 @@ Hello World!
 
 First
 
+[NOTE.speaker]
+--
+These notes are only visible in speaker moder during the presentation.
+They are also printed in pdf (*not* slide-pdf) and html output as a
+side note.
+
+If you want to skip printing in pdf / etc. you need to use it like this:
+--
+
 === Going Down
 
-Hello
+* [small]#small#
+* normal
+* [big]##Big##
+
+ifdef::backend-revealjs[]
+[NOTE.speaker]
+--
+This note will only be visible during the presentation in the speaker mode.
+--
+endif::[]
 
 == Image
 

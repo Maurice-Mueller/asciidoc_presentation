@@ -1,0 +1,28 @@
+/*
+Here you can overwrite css styles.
+
+e.g.:
+
+/* overwrites the first title * /
+.reveal section.title h1 {
+    margin-top: 2.3em;
+}
+
+/* overwrites header style * /
+.reveal h2 {
+    font-size: 6em;
+}
+
+*/
+
+.reveal {
+    font-size: 0.75cm;
+}
+
+.reveal .small {
+    font-size: 70%;
+}
+
+.reveal .big {
+    font-size: 120%;
+}

@@ -21,6 +21,7 @@ $asciidoc_pdf_out_dir = $out_dir + '/pdf'
 $asciidoc_pdf_out_file = $asciidoc_pdf_out_dir + '/' + $project_name + '.pdf'
 $slides_pdf_out_dir = $out_dir + '/slides-pdf'
 $slides_pdf_file = $slides_pdf_out_dir + '/' + $project_name + '.pdf'
+$custom_config_dir = $src_base + '/resources/custom_config'
 
 $custom_attributes = ''
 
