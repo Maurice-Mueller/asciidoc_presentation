@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'bundler/setup'
 require './config'
+require './build-scripts/extensions'
 require 'asciidoctor'
 require 'asciidoctor-pdf'
 require 'asciidoctor-revealjs'
@@ -11,7 +12,9 @@ def buildRevealJS
   FileUtils.copy_entry "lib/reveal.js-#{$revealjs_version}", "#{$revealjs_out_dir}/reveal.js"
   FileUtils.copy_entry "#{$image_dir}", "#{$revealjs_out_dir}/static"
   FileUtils.copy_entry "#{$video_dir}", "#{$revealjs_out_dir}/static"
-  attributes = "imagesdir=static revealjsdir=reveal.js revealjs_theme=#{$theme}" + $custom_attributes
+  FileUtils.copy_entry "#{$custom_config_dir}", "#{$revealjs_out_dir}/config"
+  attributes = "imagesdir=static revealjsdir=reveal.js revealjs_theme=#{$theme} customcss=config/revealjs.css"
+  attributes += $custom_attributes
   Asciidoctor.convert_file "#{$index_file}", backend: 'revealjs', safe: :unsafe,
                            to_file: "#{$revealjs_out_file}", :attributes => attributes
 end
