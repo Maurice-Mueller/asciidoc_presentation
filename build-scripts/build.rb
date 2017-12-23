@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'bundler/setup'
 require './config'
+require './build-scripts/extensions'
 require 'asciidoctor'
 require 'asciidoctor-pdf'
 require 'asciidoctor-revealjs'

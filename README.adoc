@@ -63,3 +63,8 @@ presentation project with java source code.
 === Build all output formats
 
 `./gradlew buildAll`
+
+== Custom Macros
+
+You can find example macros under `build-scripts/extensions.rb`. The macros in action
+can be seen in the presentation itself.
