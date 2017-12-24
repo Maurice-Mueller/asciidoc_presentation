@@ -68,3 +68,18 @@ presentation project with java source code.
 
 You can find example macros under `build-scripts/extensions.rb`. The macros in action
 can be seen in the presentation itself.
+
+=== Added macros
+
+There is already a custom preprocessing macro for having the speaker notes only on the
+speaker notes page:
+
+[source]
+----
+speaker-only::begin[]
+Your notes...
+speaker-only::end[]
+----
+
+This will transform to `[NOTE.speaker]` for backend `revealjs` and to a block comment for
+all other backends (and thus not included in the output).

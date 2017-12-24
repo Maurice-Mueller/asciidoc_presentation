@@ -85,3 +85,16 @@ example block
 with multiple
 lines
 --
+
+replace-during-preprocessing::[]
+
+speaker-only::begin[]
+hello
+speaker-only::end[]
+
+=== Include Processing
+
+[source,java,indent=0]
+----
+include::{java-src}/IncludeProcessing.java[]
+----
