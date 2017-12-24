@@ -6,7 +6,7 @@ require './build-scripts/download'
 
 task :'build-all' do
   buildRevealJS
-  buildSlidesPdf
+  #buildSlidesPdf
   buildAsciiDocHtml
   buildAsciidocPdf
 end

@@ -1,6 +1,36 @@
 require 'asciidoctor'
 require 'asciidoctor/extensions'
 
+
+Asciidoctor::Extensions.register do
+  preprocessor do
+    process do |document, reader|
+      returnLines = Array.new
+      reader.readlines.each {|l|
+        if !(l.start_with? 'speaker-only::begin[]') && !(l.start_with? 'speaker-only::end[]')
+          returnLines.push(l)
+          next
+        elsif document.backend != 'revealjs'
+          returnLines.push('////')
+          next
+        elsif l.start_with? 'speaker-only::begin[]'
+          returnLines.push('[NOTE.speaker]')
+          returnLines.push('--')
+          next
+        elsif l.start_with? 'speaker-only::end[]'
+          returnLines.push('--')
+          next
+        end
+      }
+      Asciidoctor::Reader.new returnLines
+    end
+  end
+end
+
+############
+# EXAMPLES
+############
+
 Asciidoctor::Extensions.register do
   block_macro :example_block_macro do
     process do |parent, target, attributes|
