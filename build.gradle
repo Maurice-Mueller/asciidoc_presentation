@@ -41,5 +41,5 @@ task buildRevealJS(type: Exec) {
 build.finalizedBy(buildRevealJS)
 
 task wrapper(type: Wrapper) {
-    version '4.0'
+    version '4.4'
 }
