@@ -64,6 +64,10 @@ presentation project with java source code.
 
 `./gradlew buildAll`
 
+=== Change project name
+
+`settings.gradle` contains the project name.
+
 == Custom Macros
 
 You can find example macros under `build-scripts/extensions.rb`. The macros in action
