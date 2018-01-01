@@ -7,3 +7,5 @@ Gemfile.lock
 .gradle/
 gradle/
 build/
+src/resources/generated
+src/resources/pdf_images_dir

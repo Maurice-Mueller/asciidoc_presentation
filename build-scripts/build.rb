@@ -5,6 +5,7 @@ require './build-scripts/extensions'
 require 'asciidoctor'
 require 'asciidoctor-pdf'
 require 'asciidoctor-revealjs'
+require 'asciidoctor-diagram'
 
 def buildRevealJS
   print "Building reveal.js...\n"
@@ -12,6 +13,7 @@ def buildRevealJS
   FileUtils.copy_entry "lib/reveal.js-#{$revealjs_version}", "#{$revealjs_out_dir}/reveal.js"
   FileUtils.copy_entry "#{$image_dir}", "#{$revealjs_out_dir}/static"
   FileUtils.copy_entry "#{$video_dir}", "#{$revealjs_out_dir}/static"
+  FileUtils.copy_entry "#{$generated_images_dir}", "#{$revealjs_out_dir}/static"
   FileUtils.copy_entry "#{$custom_config_dir}", "#{$revealjs_out_dir}/config"
   attributes = "imagesdir=static revealjsdir=reveal.js revealjs_theme=#{$theme} customcss=config/revealjs.css"
   attributes += $custom_attributes
@@ -30,7 +32,11 @@ end
 def buildAsciidocPdf
   print "Building asciidoc pdf...\n"
   FileUtils.mkpath $asciidoc_pdf_out_dir
-  Asciidoctor.convert_file "#{$index_file}", safe: :unsafe, to_file: "#{$asciidoc_pdf_out_file}", backend: 'pdf', :attributes => "imagesdir=#{Dir.pwd + '/' + $image_dir} allow-uri-read" + $custom_attributes
+  FileUtils.mkpath $pdf_images_dir
+  FileUtils.copy_entry "#{$image_dir}", "#{$pdf_images_dir}"
+  FileUtils.copy_entry "#{$video_dir}", "#{$pdf_images_dir}"
+  FileUtils.copy_entry "#{$generated_images_dir}", "#{$pdf_images_dir}"
+  Asciidoctor.convert_file "#{$index_file}", safe: :unsafe, to_file: "#{$asciidoc_pdf_out_file}", backend: 'pdf', :attributes => "imagesdir=#{Dir.pwd + '/' + $pdf_images_dir} allow-uri-read" + $custom_attributes
 end
 
 def buildSlidesPdf

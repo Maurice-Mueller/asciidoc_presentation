@@ -4,6 +4,11 @@ require 'bundler/setup'
 require './build-scripts/common'
 require './config'
 
+def initDirs
+  FileUtils.mkpath 'lib'
+  FileUtils.mkpath 'src/resources/generated'
+end
+
 def downloadRevealJS
   download("https://github.com/hakimel/reveal.js/archive/#{$revealjs_version}.zip", 'lib/revealjs.zip')
   unzip_file('lib/revealjs.zip', 'lib/')

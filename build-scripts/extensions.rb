@@ -1,6 +1,9 @@
 require 'asciidoctor'
 require 'asciidoctor/extensions'
 
+# speaker-only::begin[] will be replaced with "[NOTE.speaker]\n--" for revealjs backend. speaker-only::end[] will
+# be replaced with "--" for revealjs backend.
+# For all other backends both tags will be replaced with "////" (i.e. starting/ending a multiline comment).
 Asciidoctor::Extensions.register do
   preprocessor do
     process do |document, reader|
@@ -18,6 +21,76 @@ Asciidoctor::Extensions.register do
           next
         elsif l.start_with? 'speaker-only::end[]'
           returnLines.push('--')
+          next
+        end
+      }
+      Asciidoctor::Reader.new returnLines
+    end
+  end
+end
+
+# slides-only::begin[] and slides-only::end[] will be skipped for revealjs backend.
+# For all other backends both will be replaced with "////" (i.e. starting / ending a multiline comment).
+Asciidoctor::Extensions.register do
+  preprocessor do
+    process do |document, reader|
+      returnLines = Array.new
+      reader.readlines.each {|l|
+        if !(l.start_with? 'slides-only::begin[]') && !(l.start_with? 'slides-only::end[]')
+          returnLines.push(l)
+          next
+        elsif document.backend != 'revealjs'
+          returnLines.push('////')
+          next
+        elsif l.start_with? 'slides-only::begin[]'
+          next
+        elsif l.start_with? 'slides-only::end[]'
+          next
+        end
+      }
+      Asciidoctor::Reader.new returnLines
+    end
+  end
+end
+
+# fragment::begin[] and fragment::end[] will be replaced with 'pass:[<p class="fragment">]' resp. 'pass:[</p>]'
+# for revealjs backend. For all other backends both will be skipped.
+Asciidoctor::Extensions.register do
+  preprocessor do
+    process do |document, reader|
+      returnLines = Array.new
+      reader.readlines.each {|l|
+        if !(l.start_with? 'fragment::begin[]') && !(l.start_with? 'fragment::end[]')
+          returnLines.push(l)
+          next
+        elsif document.backend != 'revealjs'
+          next
+        elsif l.start_with? 'fragment::begin[]'
+          returnLines.push('pass:[<p class="fragment">]')
+          next
+        elsif l.start_with? 'fragment::end[]'
+          returnLines.push('pass:[</p>]')
+          next
+        end
+      }
+      Asciidoctor::Reader.new returnLines
+    end
+  end
+end
+
+# slidebreak::[] will be replaced with "=== !" for revealjs backend and for all other backend it will be dropped.
+Asciidoctor::Extensions.register do
+  preprocessor do
+    process do |document, reader|
+      returnLines = Array.new
+      reader.readlines.each {|l|
+        if !(l.start_with? 'slidebreak::[]')
+          returnLines.push(l)
+          next
+        elsif document.backend != 'revealjs'
+          next
+        elsif l.start_with? 'slidebreak::[]'
+          returnLines.push('=== !')
           next
         end
       }
@@ -71,6 +144,7 @@ Asciidoctor::Extensions.register do
 end
 
 # A processor, that will be called if any external resources are included (e.g. source code, URIs, other adoc files, ...)
+# WARNING: a custom include processor will replace current ones (e.g. the tag processor)
 Asciidoctor::Extensions.register do
   include_processor do
     process do |doc, reader, target, attributes|
@@ -80,7 +154,7 @@ Asciidoctor::Extensions.register do
     end
 
     def handles? target
-      target.end_with? '.java'
+      # target.end_with? '.java'
     end
   end
 end

@@ -18,10 +18,12 @@ end
 task :build => :'build-revealjs'
 
 task :'init-all' do
+  initDirs
   downloadRevealJS
   downloadDecktape
 end
 
 task :init do
+  initDirs
   downloadRevealJS
 end
