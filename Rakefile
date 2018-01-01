@@ -6,7 +6,7 @@ require './build-scripts/download'
 
 task :'build-all' do
   buildRevealJS
-  #buildSlidesPdf
+  buildSlidesPdf
   buildAsciiDocHtml
   buildAsciidocPdf
 end
@@ -18,10 +18,12 @@ end
 task :build => :'build-revealjs'
 
 task :'init-all' do
+  initDirs
   downloadRevealJS
   downloadDecktape
 end
 
 task :init do
+  initDirs
   downloadRevealJS
 end

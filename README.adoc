@@ -42,12 +42,24 @@ src/
   -- resources/
      -- images/
      -- videos/
+     -- generated/
+     -- pdf_images_dir/
 out/
   -- html/
   -- pdf/
   -- revealjs/
   -- slides-pdf/
 ----
+
+All files under _resources/images_, _resources/videos and _resources/generated_ are copied to
+_{reveal-js-out-dir}/static_ and _src/resources/pdf_images_dir_. So you should avoid having conflicting names (i.e. files that have
+the same name).
+
+_src/resources/pdf_images_dir_ is needed because asciidoctor-pdf can not look in multiple
+directories for resources. This directory is on gitignore.
+
+In _resources/generated_ are all generated files (e.g. pictures from plantuml embedded in asciidoc).
+This directory is also on gitignore.
 
 == Gradle / Java
 
@@ -73,10 +85,24 @@ presentation project with java source code.
 You can find example macros under `build-scripts/extensions.rb`. The macros in action
 can be seen in the presentation itself.
 
-=== Added macros
+=== Added macro
 
-There is already a custom preprocessing macro for having the speaker notes only on the
-speaker notes page:
+==== Fragments
+
+You can tag whole blocks as a fragment with the following:
+
+[source]
+----
+fragment::begin[]
+Stuff, that should be revealed during presentation.
+fragment::end[]
+----
+
+In default asciidoctor revealjs, you can only tag lists with [%step] to make each bullet an own fragment.
+
+==== Speaker Only Notes
+
+If you want to add speaker notes that should *not* be included in the other output formats:
 
 [source]
 ----
@@ -87,3 +113,26 @@ speaker-only::end[]
 
 This will transform to `[NOTE.speaker]` for backend `revealjs` and to a block comment for
 all other backends (and thus not included in the output).
+
+==== Slide break
+
+If you want to have a new slide without a title:
+
+[source]
+----
+slidebreak::[]
+----
+
+This will be transformed to `=== !` for backend `revealjs` and for all other backends it
+will be dropped.
+
+==== Slides only
+
+If you want to have some things only on the slides (and slides pdf) you can use the following:
+
+[source]
+----
+slides-only::begin[]
+Slides only stuff
+slides-only::end[]
+----
