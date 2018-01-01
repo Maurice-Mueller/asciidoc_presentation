@@ -6,7 +6,7 @@ require './config'
 
 def initDirs
   FileUtils.mkpath 'lib'
-  FileUtils.mkpath 'src/resources/generated'
+  FileUtils.mkpath $generated_images_dir
 end
 
 def downloadRevealJS
