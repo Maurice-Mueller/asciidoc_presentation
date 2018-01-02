@@ -66,6 +66,8 @@ This directory is also on gitignore.
 On branch `gradle-java` you will find a quick start project for using the
 presentation project with java source code.
 
+Before you start, you should execute `./gradlew initAll` (or `bundle install && bundle exec rake init-all`).
+
 === Compile Java and Reveal.js
 
 `./gradlew build`
