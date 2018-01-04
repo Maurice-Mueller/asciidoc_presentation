@@ -98,3 +98,27 @@ speaker-only::end[]
 ----
 include::{java-src}/IncludeProcessing.java[]
 ----
+
+== Generated Diagrams
+
+=== PlantUML: Simple
+
+[plantuml, example, png]
+--
+class SuperClass
+class SubClass
+
+SuperClass <-- SubClass
+--
+
+=== PlantUML: Scaled
+
+[plantuml, example, png]
+--
+scale 2.0
+
+class SuperClass
+class SubClass
+
+SuperClass <-- SubClass
+--
