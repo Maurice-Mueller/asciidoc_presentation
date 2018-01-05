@@ -66,10 +66,13 @@ Asciidoctor::Extensions.register do
         elsif document.backend != 'revealjs'
           next
         elsif l.start_with? 'fragment::begin[]'
-          returnLines.push('pass:[<p class="fragment">]')
+          # returnLines.push('pass:[<p class="fragment">]')
+          returnLines.push('[.fragment]')
+          returnLines.push('--')
           next
         elsif l.start_with? 'fragment::end[]'
-          returnLines.push('pass:[</p>]')
+          returnLines.push('--')
+          # returnLines.push('pass:[</p>]')
           next
         end
       }
