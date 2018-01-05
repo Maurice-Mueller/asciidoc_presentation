@@ -25,15 +25,19 @@ $slides_pdf_out_dir = $out_dir + '/slides-pdf'
 $slides_pdf_file = $slides_pdf_out_dir + '/' + $project_name + '.pdf'
 $custom_config_dir = $src_base + '/resources/custom_config'
 
+$project_dir_escaped = "#{Dir.pwd}".gsub(/ /, '\ ')
+
+# SETTINGS
 $custom_attributes = ''
-$custom_attributes += " imagesoutdir=#{Dir.pwd}/#{$generated_images_dir}"
+$custom_attributes += " imagesoutdir=#{$project_dir_escaped}/#{$generated_images_dir}"
 
 # CODE
 # To add a custom language, use the following pattern:
 # $custom_attributes += " java=#{Dir.pwd}/src/java"
 # and access it like {java} in your .adoc files.
 
-$custom_attributes += " java-src=#{Dir.pwd}/src/java/src"
+$custom_attributes += " java-src=#{$project_dir_escaped}/src/java/src"
 
 # you can use highlight.js, coderay or pygments
 $custom_attributes += ' source-highlighter=coderay'
+

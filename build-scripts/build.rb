@@ -36,11 +36,11 @@ def buildAsciidocPdf
   FileUtils.copy_entry "#{$image_dir}", "#{$pdf_images_dir}"
   FileUtils.copy_entry "#{$video_dir}", "#{$pdf_images_dir}"
   FileUtils.copy_entry "#{$generated_images_dir}", "#{$pdf_images_dir}"
-  Asciidoctor.convert_file "#{$index_file}", safe: :unsafe, to_file: "#{$asciidoc_pdf_out_file}", backend: 'pdf', :attributes => "imagesdir=#{Dir.pwd + '/' + $pdf_images_dir} allow-uri-read" + $custom_attributes
+  Asciidoctor.convert_file "#{$index_file}", safe: :unsafe, to_file: "#{$asciidoc_pdf_out_file}", backend: 'pdf', :attributes => "imagesdir=#{$project_dir_escaped + '/' + $pdf_images_dir} allow-uri-read" + $custom_attributes
 end
 
 def buildSlidesPdf
   print "Building slides pdf...\n"
   FileUtils.mkpath $slides_pdf_out_dir
-  %x(cd lib/decktape-#{$decktape_version} && node decktape.js file://#{Dir.pwd + '/' + $revealjs_out_file} #{Dir.pwd + '/' + $slides_pdf_file})
+  %x(cd lib/decktape-#{$decktape_version} && node decktape.js file://#{$project_dir_escaped + '/' + $revealjs_out_file} #{$project_dir_escaped + '/' + $slides_pdf_file})
 end
