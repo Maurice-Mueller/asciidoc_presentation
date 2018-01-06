@@ -1,4 +1,4 @@
-= Test
+= {project_name}
 Hello World!
 
 == Test First
