@@ -22,3 +22,7 @@ def unzip_file (file, destination)
   end
 end
 
+def escapeString(s)
+  s.gsub(/ /, '\ ')
+end
+
