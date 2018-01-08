@@ -18,6 +18,9 @@ This project relies on bundler (the standard dependency manager in ruby).
 If you want to use Decktape.js you need npm to be installed and accessible from
 your terminal.
 
+If you want to use *Cordova* and build a *mobile app* as well,
+please refer to section *Cordova*.
+
 === Build
 
 * `bundle exec rake build`
@@ -138,3 +141,53 @@ slides-only::begin[]
 Slides only stuff
 slides-only::end[]
 ----
+
+== Mobile App
+
+Currently, this is under development!
+
+=== Quick Start
+
+[source]
+----
+bundle exec rake install-cordova
+bundle exec rake init-cordova
+bundle exec rake build-cordova
+bundle exec rake run-cordova
+----
+
+=== Install the SDKs
+
+You have to have the platform SDK already installed. In the background
+cordova is used to create a mobile app.
+
+E.g. install the latest Android SDK under OS X:
+
+[source]
+----
+brew cask install android-sdk
+sdkmanager "platform-tools" "platforms;android-26"
+sdkmanager "build-tools;26.0.2"
+----
+
+For more information see https://developer.android.com/studio/command-line/sdkmanager.html[here].
+
+=== Install Cordova
+
+If you don't have Cordova already installed you can use one of the
+following methods:
+
+* either: `bundle exec install-cordova`
+* or: `npm install -g cordova`
+
+=== Init Cordova
+
+`bundle exec init-cordova`
+
+* a cordova project will be created under `out/cordova`
+* all platforms mentioned in `config.rb` will be added
+
+=== Run Cordova
+
+* plug in your phone
+* run `bundle exec run-cordova`

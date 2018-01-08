@@ -28,6 +28,7 @@ $html_out_file = $html_out_dir + '/' + $project_name + '.html'
 $asciidoc_pdf_out_dir = $out_dir + '/pdf'
 $asciidoc_pdf_out_file = $asciidoc_pdf_out_dir + '/' + $project_name + '.pdf'
 $slides_pdf_out_dir = $out_dir + '/slides-pdf'
+$cordova_out_dir = $out_dir + '/cordova'
 $slides_pdf_file = $slides_pdf_out_dir + '/' + $project_name + '.pdf'
 $custom_config_dir = $resources_base + '/custom_config'
 
@@ -51,3 +52,10 @@ $custom_attributes += " java-src=#{$project_dir_escaped}/src/java/src"
 # you can use highlight.js, coderay or pygments
 $custom_attributes += ' source-highlighter=coderay'
 
+
+# CORDOVA
+# you only need those settings if you want to build an android or iOS app
+$cordova_platforms = ['android']
+
+# MISC
+$project_name_escaped = escapeString($project_name)
