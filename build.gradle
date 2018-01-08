@@ -53,3 +53,23 @@ task initAll(type: Exec) {
     workingDir '.'
     commandLine 'bundle', 'exec', 'rake', 'init-all'
 }
+
+task installCordova(type: Exec) {
+    workingDir '.'
+    commandLine 'bundle', 'exec', 'rake', 'install-cordova'
+}
+
+task initCordova(type: Exec) {
+    workingDir '.'
+    commandLine 'bundle', 'exec', 'rake', 'init-cordova'
+}
+
+task buildCordova(type: Exec) {
+    workingDir '.'
+    commandLine 'bundle', 'exec', 'rake', 'build-cordova'
+}
+
+task runCordova(type: Exec) {
+    workingDir '.'
+    commandLine 'bundle', 'exec', 'rake', 'run-cordova'
+}
