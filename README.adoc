@@ -191,3 +191,19 @@ following methods:
 
 * plug in your phone
 * run `bundle exec run-cordova`
+
+== Multi components
+
+To use the multi components branch, you have to take care of the following
+
+* put your components under `src/asciidoc/components`
+* put your presentations (composites) under `src/asciidoc/composites`
+** each must go in a separate folder
+** each folder must contain a `index.adoc` which will be the entry file
+* to build all composites you can run
+** `bundle exec rake build-revealjs` to build only revealjs
+** `bundle exec rake build-all` to build all output formats
+* to build only a selected number of composites
+** `bundle exec rake build-revealjs COMPOSITE_1 "Composite 2"` to build only revealjs
+** `bundle exec rake build-all COMPOSITE_1 "Composite 2"` to build all output formats
+
