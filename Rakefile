@@ -37,7 +37,6 @@ task :'build-all' do
     buildAsciiDocHtml(composite)
     buildAsciidocPdf(composite)
   }
-  clearTaskList(ARGV)
 end
 
 task :'build-revealjs' do
