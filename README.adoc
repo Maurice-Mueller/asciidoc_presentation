@@ -11,9 +11,10 @@ This project relies on bundler (the standard dependency manager in ruby).
 `gem install bundler`
 
 === Setup
-* `bundle install`
-* without Decktape.js: `bundle exec rake init`
-* with Decktape.js: `bundle exec rake init-all`
+. `bundle install`
+. init with or without decktape (presentation to pdf)
+** without Decktape.js: `bundle exec rake init`
+** with Decktape.js: `bundle exec rake init-all`
 
 If you want to use Decktape.js you need npm to be installed and accessible from
 your terminal.
