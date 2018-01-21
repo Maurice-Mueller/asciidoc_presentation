@@ -1,0 +1,27 @@
+== Notes
+
+=== Speaker and PDF
+
+The note on this slide appears in speaker notes as well as in
+all other output formats (e.g. pdf).
+
+
+[NOTE.speaker]
+--
+These notes are only visible in speaker moder during the presentation.
+They are also printed in pdf (*not* slide-pdf) and html output as a
+side note.
+
+For a note that is only visible in speaker mode see the next slide.
+--
+
+=== Speaker only
+
+The notes on this slide will only appear on the speaker note section.
+
+These notes will not appear in other rendered formats (e.g. pdf).
+
+speaker-only::begin[]
+hello
+speaker-only::end[]
+

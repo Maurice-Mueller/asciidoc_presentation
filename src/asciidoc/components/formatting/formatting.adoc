@@ -1,0 +1,44 @@
+== Formatting
+
+=== Small, normal, big
+
+* [small]#small#
+* normal
+* [big]##Big##
+
+
+=== Blocks
+
+[.small]
+--
+This is a small block.
+--
+
+[.big]
+--
+This is a big block.
+--
+
+=== Code (inline)
+
+[source,java]
+----
+class Test {
+  public String test = "hello";
+}
+----
+
+
+=== Code (from file)
+
+[source,java,indent=0]
+----
+include::{java-src}/Hello.java[]
+----
+
+=== Code (from file with tags)
+
+[source,java,indent=0]
+----
+include::{java-src}/Tags.java[tag=print]
+----

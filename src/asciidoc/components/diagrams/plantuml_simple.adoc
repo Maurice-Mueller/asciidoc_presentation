@@ -1,0 +1,9 @@
+=== PlantUML: Simple
+
+[plantuml, generated_simple, png]
+--
+class SuperClass
+class SubClass
+
+SuperClass <-- SubClass
+--

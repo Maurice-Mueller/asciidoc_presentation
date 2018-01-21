@@ -1,0 +1,8 @@
+= Example
+
+include::{comp}/formatting/formatting.adoc[]
+include::{comp}/notes/notes.adoc[]
+include::{comp}/media/media.adoc[]
+include::{comp}/extensions/extensions.adoc[]
+include::{comp}/diagrams/diagrams.adoc[]
+

@@ -1,0 +1,6 @@
+== Generated Diagrams
+
+include::plantuml_simple.adoc[]
+
+include::plantuml_scaled.adoc[]
+

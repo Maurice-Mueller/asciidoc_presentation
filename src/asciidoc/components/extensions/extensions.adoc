@@ -1,0 +1,25 @@
+== Asciidoc Extensions
+
+=== Custom Extensions
+
+example_block_macro::some_text[param=200]
+
+example_block_macro::without_param[]
+
+[example_block,param=hello]
+--
+example block
+with multiple
+lines
+--
+
+replace-during-preprocessing::[]
+
+
+=== Include Processing
+
+[source,java,indent=0]
+----
+include::{java-src}/IncludeProcessing.java[]
+----
+

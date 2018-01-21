@@ -7,40 +7,61 @@ require 'asciidoctor-pdf'
 require 'asciidoctor-revealjs'
 require 'asciidoctor-diagram'
 
-def buildRevealJS
+def revealJSWorkingDir(composite)
+  return $out_dir + '/' + composite + $revealjs_out_dir
+end
+
+def revealJSOutFile(composite)
+  return revealJSWorkingDir(composite) + '/' + composite + '.html'
+end
+
+def indexFile(composite)
+  return "#{$composites_dir}/#{composite}/index.adoc"
+end
+
+def buildRevealJS(composite)
   print "Building reveal.js...\n"
-  FileUtils.mkpath $revealjs_out_dir
-  FileUtils.copy_entry "lib/reveal.js-#{$revealjs_version}", "#{$revealjs_out_dir}/reveal.js"
-  FileUtils.copy_entry "#{$image_dir}", "#{$revealjs_out_dir}/static"
-  FileUtils.copy_entry "#{$video_dir}", "#{$revealjs_out_dir}/static"
-  FileUtils.copy_entry "#{$generated_images_dir}", "#{$revealjs_out_dir}/static"
-  FileUtils.copy_entry "#{$custom_config_dir}", "#{$revealjs_out_dir}/config"
+  workingDir = revealJSWorkingDir(composite)
+  FileUtils.mkpath workingDir
+  FileUtils.copy_entry "lib/reveal.js-#{$revealjs_version}", "#{workingDir}/reveal.js"
+  FileUtils.copy_entry "#{$image_dir}", "#{workingDir}/static"
+  FileUtils.copy_entry "#{$video_dir}", "#{workingDir}/static"
+  FileUtils.copy_entry "#{$generated_images_dir}", "#{workingDir}/static"
+  FileUtils.copy_entry "#{$custom_config_dir}", "#{workingDir}/config"
   attributes = "imagesdir=static revealjsdir=reveal.js revealjs_theme=#{$theme} customcss=config/revealjs.css"
   attributes += $custom_attributes
-  Asciidoctor.convert_file "#{$index_file}", backend: 'revealjs', safe: :unsafe,
-                           to_file: "#{$revealjs_out_file}", :attributes => attributes
+  Asciidoctor.convert_file indexFile(composite), backend: 'revealjs', safe: :unsafe,
+                           to_file: "#{revealJSOutFile(composite)}", :attributes => attributes
 end
 
-def buildAsciiDocHtml
+def buildAsciiDocHtml(composite)
   print "Building asciidoc html...\n"
-  FileUtils.mkpath $html_out_dir
-  FileUtils.copy_entry "#{$image_dir}", "#{$html_out_dir}/static"
-  FileUtils.copy_entry "#{$video_dir}", "#{$html_out_dir}/static"
-  Asciidoctor.convert_file "#{$index_file}", safe: :unsafe, to_file: "#{$html_out_file}", :attributes => "imagesdir=static" + $custom_attributes
+  workingDir = $out_dir + '/' + composite + $html_out_dir
+  FileUtils.mkpath workingDir
+  FileUtils.copy_entry "#{$image_dir}", "#{workingDir}/static"
+  FileUtils.copy_entry "#{$video_dir}", "#{workingDir}/static"
+  Asciidoctor.convert_file indexFile(composite), safe: :unsafe, to_file: "#{workingDir}/#{composite}.html", :attributes => "imagesdir=static" + $custom_attributes
 end
 
-def buildAsciidocPdf
+def buildAsciidocPdf(composite)
   print "Building asciidoc pdf...\n"
-  FileUtils.mkpath $asciidoc_pdf_out_dir
-  FileUtils.mkpath $pdf_images_dir
+  workingDir = $out_dir + '/' + composite + $asciidoc_pdf_out_dir
+  FileUtils.mkpath workingDir
   FileUtils.copy_entry "#{$image_dir}", "#{$pdf_images_dir}"
   FileUtils.copy_entry "#{$video_dir}", "#{$pdf_images_dir}"
   FileUtils.copy_entry "#{$generated_images_dir}", "#{$pdf_images_dir}"
-  Asciidoctor.convert_file "#{$index_file}", safe: :unsafe, to_file: "#{$asciidoc_pdf_out_file}", backend: 'pdf', :attributes => "imagesdir=#{$project_dir_escaped + '/' + $pdf_images_dir} allow-uri-read" + $custom_attributes
+  Asciidoctor.convert_file indexFile(composite), safe: :unsafe, to_file: "#{workingDir}/#{composite}.pdf", backend: 'pdf', :attributes => "imagesdir=#{$project_dir_escaped + '/' + $pdf_images_dir} allow-uri-read" + $custom_attributes
 end
 
-def buildSlidesPdf
+def slidesPdfWorkingDir(composite)
+  return $out_dir + '/' + composite + $slides_pdf_out_dir
+end
+
+def buildSlidesPdf(composite)
   print "Building slides pdf...\n"
-  FileUtils.mkpath $slides_pdf_out_dir
-  %x(cd lib/decktape-#{$decktape_version} && node decktape.js file://#{$project_dir_escaped + '/' + $revealjs_out_file} #{$project_dir_escaped + '/' + $slides_pdf_file})
+  workingDir = slidesPdfWorkingDir(composite)
+  FileUtils.mkpath workingDir
+  inputFile = "file://#{$project_dir_escaped + '/' + escapeString(revealJSOutFile(composite))}"
+  outputFile = "#{$project_dir_escaped + '/' + escapeString(slidesPdfWorkingDir(composite) +'/' + composite) + '.pdf'}"
+  %x(cd lib/decktape-#{$decktape_version} && node decktape.js #{inputFile} #{outputFile})
 end

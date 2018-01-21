@@ -1,0 +1,11 @@
+== Media
+
+=== Images
+
+image::test.jpg[]
+
+=== Videos
+
+ifndef::backend-pdf[]
+video::test.mp4[]
+endif::[]

@@ -1,0 +1,11 @@
+=== PlantUML: Scaled
+
+[plantuml, generated_scaled, png]
+--
+scale 2.0
+
+class SuperClass
+class SubClass
+
+SuperClass <-- SubClass
+--

@@ -15,21 +15,18 @@ $decktape_version = '2.6.1'
 $src_base = 'src'
 $resources_base = $src_base + '/resources'
 $doc_dir = $src_base + '/asciidoc'
-$index_file = $doc_dir + '/index.adoc'
+$components_dir = $doc_dir + '/components'
+$composites_dir = $doc_dir + '/composites'
 $video_dir = $resources_base + '/videos'
 $image_dir = $resources_base + '/images'
 $generated_images_dir = $resources_base + '/generated'
 $pdf_images_dir = $resources_base + '/pdf_images_dir'
 $out_dir = 'out'
-$revealjs_out_dir = $out_dir + '/revealjs'
-$revealjs_out_file = $revealjs_out_dir + '/' + $project_name + '.html'
-$html_out_dir = $out_dir + '/html'
-$html_out_file = $html_out_dir + '/' + $project_name + '.html'
-$asciidoc_pdf_out_dir = $out_dir + '/pdf'
-$asciidoc_pdf_out_file = $asciidoc_pdf_out_dir + '/' + $project_name + '.pdf'
-$slides_pdf_out_dir = $out_dir + '/slides-pdf'
-$cordova_out_dir = $out_dir + '/cordova'
-$slides_pdf_file = $slides_pdf_out_dir + '/' + $project_name + '.pdf'
+$revealjs_out_dir = '/revealjs'
+$html_out_dir = '/html'
+$asciidoc_pdf_out_dir = '/pdf'
+$slides_pdf_out_dir =  '/slides-pdf'
+$cordova_out_dir = '/cordova'
 $custom_config_dir = $resources_base + '/custom_config'
 
 $project_dir_escaped = escapeString("#{Dir.pwd}")
@@ -41,6 +38,7 @@ $custom_attributes += " author=#{escapeString($author)}"
 $custom_attributes += " email=#{escapeString($email)}"
 $custom_attributes += " project_name=#{escapeString($project_name)}"
 $custom_attributes += " project_version=#{escapeString($project_version)}"
+$custom_attributes += " comp=#{$project_dir_escaped}/#{escapeString($components_dir)}"
 
 # CODE
 # To add a custom language, use the following pattern:
