@@ -1,0 +1,88 @@
+/**
+ WARNING: Obviously, the directory layout for the source code should be the same as in config.rb!
+ */
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'src/java/src'
+        }
+        resources {
+            srcDirs 'src/java/resources'
+        }
+    }
+    test {
+        java {
+            srcDirs 'src/java/test'
+        }
+        resources {
+            srcDirs 'src/java/resources'
+        }
+    }
+}
+
+def appendComposites(command) {
+    if (!project.hasProperty("composites")) {
+        return command
+    }
+    project.findProperty("composites").split(',').each {command+=it}
+    return command
+}
+
+task buildAll(type: Exec) {
+    def command = ['bundle', 'exec', 'rake', 'build-all']
+    commandLine appendComposites(command)
+}
+
+task buildRevealJS(type: Exec) {
+    def command = ['bundle', 'exec', 'rake', 'build-revealjs']
+    commandLine appendComposites(command)
+}
+
+build.finalizedBy(buildRevealJS)
+
+task wrapper(type: Wrapper) {
+    version '4.4'
+}
+
+task installGems(type: Exec) {
+    workingDir '.'
+    commandLine 'bundle', 'install', '--path', '.bundle'
+}
+
+task initAll(type: Exec) {
+    workingDir '.'
+    commandLine 'bundle', 'exec', 'rake', 'init-all'
+}
+
+task installCordova(type: Exec) {
+    workingDir '.'
+    commandLine 'bundle', 'exec', 'rake', 'install-cordova'
+}
+
+task initCordova(type: Exec) {
+    workingDir '.'
+    def command = ['bundle', 'exec', 'rake', 'init-cordova']
+    commandLine appendComposites(command)
+}
+
+task buildCordova(type: Exec) {
+    workingDir '.'
+    def command = ['bundle', 'exec', 'rake', 'build-cordova']
+    commandLine appendComposites(command)
+}
+
+task runCordova(type: Exec) {
+    workingDir '.'
+    def command = ['bundle', 'exec', 'rake', 'run-cordova']
+    commandLine appendComposites(command)
+}

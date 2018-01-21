@@ -207,6 +207,20 @@ To use the multi components branch, you have to take care of the following
 ** `bundle exec rake build-revealjs COMPOSITE_1 "Composite 2"` to build only revealjs
 ** `bundle exec rake build-all COMPOSITE_1 "Composite 2"` to build all output formats
 
+=== Gradle
+
+* all composites
+** `./gradlew buildRevealJS`
+** `./gradlew buildAll`
+* specific composites
+** `./gradlew buildRevealJS -Pcomposites='example,example project'`
+** `./gradlew buildAll -Pcomposites='example,example project'`
+* cordova
+** `./gradlew initCordova -Pcomposites='example'`
+** `./gradlew buildCordova -Pcomposites='example'`
+** `./gradlew runCordova -Pcomposites='example'`
+*** running must only have *one* composite
+
 === Cordova
 
 * Cordova must be installed (otherwise use `bundle exec rake install-cordova`
