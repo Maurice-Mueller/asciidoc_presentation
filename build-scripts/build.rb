@@ -7,17 +7,6 @@ require 'asciidoctor-pdf'
 require 'asciidoctor-revealjs'
 require 'asciidoctor-diagram'
 
-def revealJSWorkingDir(composite)
-  return $out_dir + '/' + composite + $revealjs_out_dir
-end
-
-def revealJSOutFile(composite)
-  return revealJSWorkingDir(composite) + '/' + composite + '.html'
-end
-
-def indexFile(composite)
-  return "#{$composites_dir}/#{composite}/index.adoc"
-end
 
 def buildRevealJS(composite)
   print "Building reveal.js...\n"

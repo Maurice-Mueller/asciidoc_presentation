@@ -8,20 +8,23 @@ def installCordova
   %x(npm install -g cordova)
 end
 
-def initCordova
-  %x(cordova create #{$cordova_out_dir} com.example.presentation presentation)
+def initCordova(composite)
+  workingDirEscaped = escapeString(cordovaWorkingDir(composite))
+  %x(cordova create #{workingDirEscaped} com.example.presentation #{escapeString(composite)})
   for platform in $cordova_platforms
-    %x(cd #{$cordova_out_dir} && cordova platform add #{platform})
+    %x(cd #{workingDirEscaped} && cordova platform add #{platform})
   end
 end
 
-def buildCordova
-  FileUtils.rm_rf("#{$cordova_out_dir}/www")
-  FileUtils.cp_r("#{$revealjs_out_dir}", "#{$cordova_out_dir}/www")
-  FileUtils.mv("#{$cordova_out_dir}/www/#{$project_name}.html", "#{$cordova_out_dir}/www/index.html")
-  %x(cd #{$cordova_out_dir} && cordova build)
+def buildCordova(composite)
+  workingDir = cordovaWorkingDir(composite)
+  FileUtils.rm_rf("#{workingDir}/www")
+  FileUtils.cp_r("#{revealJSWorkingDir(composite)}", "#{workingDir}/www")
+  FileUtils.mv("#{workingDir}/www/#{composite}.html", "#{workingDir}/www/index.html")
+  %x(cd #{escapeString(workingDir)} && cordova build)
 end
 
-def runCordova
-  %x(cd #{$cordova_out_dir} && cordova run android)
+def runCordova(composite)
+  workingDirEscaped = escapeString(cordovaWorkingDir(composite))
+  %x(cd #{workingDirEscaped} && cordova run android)
 end

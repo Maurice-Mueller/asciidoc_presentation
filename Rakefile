@@ -59,18 +59,24 @@ task :init do
   downloadRevealJS
 end
 
-task :'init-cordova' do
+task :'install-cordova' do
   installCordova
 end
 
 task :'init-cordova' do
-  initCordova
+  buildingComposites(ARGV).each {|composite|
+    initCordova(composite)
+  }
 end
 
 task :'build-cordova' do
-  buildCordova
+  buildingComposites(ARGV).each {|composite|
+    buildCordova(composite)
+  }
 end
 
 task :'run-cordova' do
-  runCordova
+  buildingComposites(ARGV).each {|composite|
+    runCordova(composite)
+  }
 end

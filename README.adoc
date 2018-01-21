@@ -207,3 +207,12 @@ To use the multi components branch, you have to take care of the following
 ** `bundle exec rake build-revealjs COMPOSITE_1 "Composite 2"` to build only revealjs
 ** `bundle exec rake build-all COMPOSITE_1 "Composite 2"` to build all output formats
 
+=== Cordova
+
+* Cordova must be installed (otherwise use `bundle exec rake install-cordova`
+* build the reveal JS version (e.g. `bundle exec rake build-revealjs`)
+* init cordova `bundle exec rake init-cordova`
+* build `bundle exec rake build-cordova`
+* run a specific composite (phone needs to be plugged in before!)
+** `bundle exec rake run-cordova COMPOSITE`
+
